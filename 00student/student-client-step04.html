@@ -93,6 +93,8 @@
       });
       //StudentForm 의 Submit 이벤트 처리하기
       studentForm.addEventListener("submit", function(event){
+        //기본으로 설정된 Event가 동작하지 않도록 하기 위함
+        event.preventDefault();
         console.log("Form 이 체출 되었음....")
       });
 
