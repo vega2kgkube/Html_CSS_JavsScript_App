@@ -114,3 +114,7 @@ function loadStudents() {
             alert("학생 목록을 불러오는데 실패했습니다!.");
         });
 };
+
+function renderStudentTable(students) {
+    console.log(students);
+}
