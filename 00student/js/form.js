@@ -96,9 +96,9 @@ function validateStudent(student) {// 필수 필드 검사
 function isValidEmail(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
-}
+}//isValidEmail
 
 //Student(학생) 목록을 Load 하는 함수
 function loadStudents() {
     console.log("학생 목록 Load 중.....");
-}
+};
