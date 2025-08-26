@@ -30,7 +30,7 @@ studentForm.addEventListener("submit", function (event) {
         email: stuFormData.get("email").trim(),
         dateOfBirth: stuFormData.get("dateOfBirth"),
     }
-    
+
     //유효성 체크하는 함수 호출하기
     if(!validateStudent(studentData)){
         //검증체크 실패하면 리턴하기
@@ -53,6 +53,13 @@ function validateStudent(student) {// 필수 필드 검사
         alert("학번을 입력해주세요.");
         return false;
     }
+    // 학번 형식 검사 (예: 영문과 숫자 조합)
+    //const studentNumberPattern = /^[A-Za-z0-9]+$/;
+    const studentNumberPattern = /^[A-Za-z]\d{5}$/;
+    if (!studentNumberPattern.test(student.studentNumber)) {
+        alert("학번은 영문(S)과 숫자(5자리)만 입력 가능합니다.");
+        return false;
+    }
 
     if (!student.address) {
         alert("주소를 입력해주세요.");
@@ -66,13 +73,6 @@ function validateStudent(student) {// 필수 필드 검사
 
     if (!student.email) {
         alert("이메일을 입력해주세요.");
-        return false;
-    }
-    // 학번 형식 검사 (예: 영문과 숫자 조합)
-    //const studentNumberPattern = /^[A-Za-z0-9]+$/;
-    const studentNumberPattern = /^s\d{5}$/;
-    if (!studentNumberPattern.test(student.studentNumber)) {
-        alert("학번은 영문(S)과 숫자(5자리)만 입력 가능합니다.");
         return false;
     }
 
