@@ -91,6 +91,11 @@
       document.addEventListener("DOMContentLoaded", function() {
           loadStudents();
       });
+      //StudentForm 의 Submit 이벤트 처리하기
+      studentForm.addEventListener("submit", function(event){
+        console.log("Form 이 체출 되었음....")
+      });
+
       //Student(학생) 목록을 Load 하는 함수
       function loadStudents() {
           console.log("학생 목록 Load 중.....");
