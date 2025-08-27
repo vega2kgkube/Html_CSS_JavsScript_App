@@ -46,8 +46,14 @@ studentForm.addEventListener("submit", function (event) {
     //유효한 데이터 출력하기
     console.log(studentData);
 
-    //서버로 Student 등록 요청하기
-    createStudent(studentData);
+    //현재 수정중인 학생Id가 있으면 수정처리
+    if(editingStudentId){
+        //서버로 Student 수정 요청하기
+        updateStudent(editingStudentId, studentData);
+    }else {
+        //서버로 Student 등록 요청하기
+        createStudent(studentData);
+    }
 
 }); //submit 이벤트
 
@@ -177,7 +183,7 @@ function updateStudent(studentId, studentData) {
         })
         .then((result) => {
             alert("학생이 성공적으로 수정되었습니다!");
-            //등록모드로 초기화
+            //등록모드로 전환
             resetForm();
             //목록 새로 고침
             loadStudents();
