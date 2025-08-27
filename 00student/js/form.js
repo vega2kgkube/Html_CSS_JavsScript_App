@@ -168,12 +168,13 @@ function updateStudent(studentId, studentData) {
     })
         .then(async (response) => {
             if (!response.ok) {
-                //응답 본문을 읽어서 에러 메시지 추출
+                //응답 본문을 읽어서 에러 메시지 추출 
+                //errorData 객체는 서버의 ErrorObject와 매핑이 된다.
                 const errorData = await response.json();
                 //status code와 message를 확인하기
                 if (response.status === 409) {
                     //중복 오류 처리
-                    throw new Error(errorData.message || '중복 되는 정보가 있습니다.');
+                    throw new Error(`${errorData.message}(에러코드: ${errorData.statusCode})` || '중복 되는 정보가 있습니다.');
                 } else {
                     //기타 오류 처리
                     throw new Error(errorData.message || '학생 수정에 실패했습니다.')
