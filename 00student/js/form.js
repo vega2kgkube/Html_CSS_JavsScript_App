@@ -48,10 +48,10 @@ studentForm.addEventListener("submit", function (event) {
     console.log(studentData);
 
     //현재 수정중인 학생Id가 있으면 수정처리
-    if(editingStudentId){
+    if (editingStudentId) {
         //서버로 Student 수정 요청하기
         updateStudent(editingStudentId, studentData);
-    }else {
+    } else {
         //서버로 Student 등록 요청하기
         createStudent(studentData);
     }
@@ -309,3 +309,20 @@ function renderStudentTable(students) {
         studentTableBody.appendChild(row);
     });
 }//renderStudentTable
+
+//성공 메시지 출력
+function showSuccess(message) {
+    formError.textContent = message;
+    formError.style.display = 'block';
+    formError.style.color = '#28a745';
+}
+//에러 메시지 출력
+function showError(message) {
+    formError.textContent = message;
+    formError.style.display = 'block';
+    formError.style.color = '#dc3545';
+}
+//메시지 초기화
+function clearMessages() {
+    formError.style.display = 'none';
+}
