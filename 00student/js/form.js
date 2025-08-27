@@ -12,6 +12,7 @@ const formErrorSpan = document.getElementById("formError");
 
 //Document Load 이벤트 처리하기
 document.addEventListener("DOMContentLoaded", function () {
+    //resetForm();
     loadStudents();
 });
 //StudentForm 의 Submit 이벤트 처리하기
@@ -83,8 +84,8 @@ function createStudent(studentData) {
         .then((result) => {
             showSuccess("학생이 성공적으로 등록되었습니다!");
             //입력 Form의 input의 값 초기화
-            //studentForm.reset();
-            resetForm();
+            studentForm.reset();
+            //resetForm();
             //목록 새로 고침
             loadStudents();
         })
@@ -116,10 +117,14 @@ function deleteStudent(studentId, studentName) {
                     throw new Error(errorData.message || '학생 삭제에 실패했습니다.')
                 }
             }
-            alert("학생이 성공적으로 삭제되었습니다!");
+            showSuccess("학생이 성공적으로 삭제되었습니다!");
             //목록 새로 고침
             loadStudents();
         })
+        .catch((error) => {
+            console.log('Error : ', error);
+            showError(error.message);
+        });
 }//deleteStudent
 
 //학생 수정전에 데이터를 로드하는 함수
@@ -207,6 +212,8 @@ function resetForm() {
     submitButton.textContent = "학생 등록";
     //cancel 버튼의 사라지게
     cancelButton.style.display = 'none';
+    //error message 초기화
+    clearMessages();
 }//resetForm
 
 
@@ -271,7 +278,7 @@ function isValidEmail(email) {
 //Student(학생) 목록을 Load 하는 함수
 function loadStudents() {
     console.log("학생 목록 Load 중.....");
-    fetch(`${API_BASE_URL}/api/students2`) //Promise
+    fetch(`${API_BASE_URL}/api/students`) //Promise
         .then(async (response) => {
             if (!response.ok) {
                 //응답 본문을 읽어서 에러 메시지 추출
