@@ -162,7 +162,7 @@ function editStudent(studentId) {
         })
         .catch((error) => {
             console.log('Error : ', error);
-            alert(error.message);
+            showError(error.message);
         });
 }//editStudent
 
@@ -190,7 +190,7 @@ function updateStudent(studentId, studentData) {
             return response.json();
         })
         .then((result) => {
-            alert("학생이 성공적으로 수정되었습니다!");
+            showSuccess("학생이 성공적으로 수정되었습니다!");
             //등록모드로 전환
             resetForm();
             //목록 새로 고침
@@ -198,7 +198,7 @@ function updateStudent(studentId, studentData) {
         })
         .catch((error) => {
             console.log('Error : ', error);
-            alert(error.message);
+            showError(error.message);
         });
 }//updateStudent
 
