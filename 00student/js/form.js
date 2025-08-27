@@ -280,7 +280,8 @@ function loadStudents() {
         .then((students) => renderStudentTable(students))
         .catch((error) => {
             console.log(error);
-            alert(">>> 학생 목록을 불러오는데 실패했습니다!.");
+            //alert(">>> 학생 목록을 불러오는데 실패했습니다!.");
+            showError("학생 목록을 불러오는데 실패했습니다!.");
         });
 };
 
@@ -312,17 +313,17 @@ function renderStudentTable(students) {
 
 //성공 메시지 출력
 function showSuccess(message) {
-    formError.textContent = message;
-    formError.style.display = 'block';
-    formError.style.color = '#28a745';
+    formErrorSpan.textContent = message;
+    formErrorSpan.style.display = 'block';
+    formErrorSpan.style.color = '#28a745';
 }
 //에러 메시지 출력
 function showError(message) {
-    formError.textContent = message;
-    formError.style.display = 'block';
-    formError.style.color = '#dc3545';
+    formErrorSpan.textContent = message;
+    formErrorSpan.style.display = 'block';
+    formErrorSpan.style.color = '#dc3545';
 }
 //메시지 초기화
 function clearMessages() {
-    formError.style.display = 'none';
+    formErrorSpan.style.display = 'none';
 }
