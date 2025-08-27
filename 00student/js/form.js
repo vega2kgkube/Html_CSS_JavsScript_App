@@ -153,6 +153,41 @@ function editStudent(studentId) {
         });
 }//editStudent
 
+//학생 수정을 처리하는 함수
+function updateStudent(studentId, studentData) {
+    fetch(`${API_BASE_URL}/api/students/${studentId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(studentData)  //Object => json
+    })
+        .then(async (response) => {
+            if (!response.ok) {
+                //응답 본문을 읽어서 에러 메시지 추출
+                const errorData = await response.json();
+                //status code와 message를 확인하기
+                if (response.status === 409) {
+                    //중복 오류 처리
+                    throw new Error(errorData.message || '중복 되는 정보가 있습니다.');
+                } else {
+                    //기타 오류 처리
+                    throw new Error(errorData.message || '학생 수정에 실패했습니다.')
+                }
+            }
+            return response.json();
+        })
+        .then((result) => {
+            alert("학생이 성공적으로 수정되었습니다!");
+            //등록모드로 초기화
+            resetForm();
+            //목록 새로 고침
+            loadStudents();
+        })
+        .catch((error) => {
+            console.log('Error : ', error);
+            alert(error.message);
+        });
+}//updateStudent
+
 //입력필드 초기화,수정모드에서 등록모드로 전환
 function resetForm() {
     //form 초기화
@@ -164,6 +199,7 @@ function resetForm() {
     //cancel 버튼의 사라지게
     cancelButton.style.display = 'none';
 }//resetForm
+
 
 //입력항목의 값의 유효성을 체크하는 함수
 function validateStudent(student) {// 필수 필드 검사
