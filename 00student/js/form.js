@@ -25,10 +25,12 @@ studentForm.addEventListener("submit", function (event) {
     const studentData = {
         name: stuFormData.get("name").trim(),
         studentNumber: stuFormData.get("studentNumber").trim(),
-        address: stuFormData.get("address").trim(),
-        phoneNumber: stuFormData.get("phoneNumber").trim(),
-        email: stuFormData.get("email").trim(),
-        dateOfBirth: stuFormData.get("dateOfBirth"),
+        detailRequest: {
+            address: stuFormData.get("address").trim(),
+            phoneNumber: stuFormData.get("phoneNumber").trim(),
+            email: stuFormData.get("email").trim(),
+            dateOfBirth: stuFormData.get("dateOfBirth"),
+        }
     }
 
     //유효성 체크하는 함수 호출하기
@@ -69,6 +71,7 @@ function createStudent(studentData) {
         })
         .then((result) => {
             alert("학생이 성공적으로 등록되었습니다!");
+            //입력 Form의 input의 값 초기화
             studentForm.reset();
             //목록 새로 고침
             loadStudents();
