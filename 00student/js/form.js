@@ -29,7 +29,7 @@ studentForm.addEventListener("submit", function (event) {
             address: stuFormData.get("address").trim(),
             phoneNumber: stuFormData.get("phoneNumber").trim(),
             email: stuFormData.get("email").trim(),
-            dateOfBirth: stuFormData.get("dateOfBirth"),
+            dateOfBirth: stuFormData.get("dateOfBirth") || null,
         }
     }
 
@@ -101,34 +101,36 @@ function validateStudent(student) {// 필수 필드 검사
         return false;
     }
 
-    if (!student.address) {
-        alert("주소를 입력해주세요.");
-        return false;
-    }
+    if (student.detailRequest) {
+        const studentDetail = student.detailRequest;
+        if (!studentDetail.address) {
+            alert("주소를 입력해주세요.");
+            return false;
+        }
 
-    if (!student.phoneNumber) {
-        alert("전화번호를 입력해주세요.");
-        return false;
-    }
+        if (!studentDetail.phoneNumber) {
+            alert("전화번호를 입력해주세요.");
+            return false;
+        }
 
-    if (!student.email) {
-        alert("이메일을 입력해주세요.");
-        return false;
-    }
+        if (!studentDetail.email) {
+            alert("이메일을 입력해주세요.");
+            return false;
+        }
 
-    // 전화번호 형식 검사
-    const phonePattern = /^[0-9-\s]+$/;
-    if (!phonePattern.test(student.phoneNumber)) {
-        alert("올바른 전화번호 형식이 아닙니다.");
-        return false;
-    }
+        // 전화번호 형식 검사
+        const phonePattern = /^[0-9-\s]+$/;
+        if (!phonePattern.test(studentDetail.phoneNumber)) {
+            alert("올바른 전화번호 형식이 아닙니다.");
+            return false;
+        }
 
-    // 이메일 형식 검사 (입력된 경우에만)
-    if (student.email && !isValidEmail(student.email)) {
-        alert("올바른 이메일 형식이 아닙니다.");
-        return false;
+        // 이메일 형식 검사 (입력된 경우에만)
+        if (student.email && !isValidEmail(studentDetail.email)) {
+            alert("올바른 이메일 형식이 아닙니다.");
+            return false;
+        }
     }
-
     return true;
 }//validateStudent
 
