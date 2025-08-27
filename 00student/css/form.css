@@ -200,3 +200,15 @@ tr:hover {
     gap: 10px;
     /* 요소들 간의 간격 */
 }
+
+/* 에러 메시지 스타일 */
+.error-message {
+    color: #dc3545;
+    /* 빨간색 텍스트 (Bootstrap danger 색상) */
+    font-size: 0.9em;
+    /* 상대적으로 작은 폰트 크기 */
+    margin-top: 5px;
+    /* 위쪽 여백 */
+    display: none;
+    /* 기본적으로 숨김 */
+}
